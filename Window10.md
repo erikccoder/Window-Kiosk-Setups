@@ -35,7 +35,26 @@ Windows Registry Editor Version 5.00
 5. Click Turn on fast startup (recommended) so that the checkmark disappears.
 6. Click Save changes.
 
+### Task Monitoring / Task restart batch scripts
+```
+@echo off
 
+SET IMG_NAME=xxx.exe
+SET THE_EXE=C:\path\to\exe\%IMG_NAME%
+
+taskkill /f /fi "status eq not responding"
+tasklist /nh /fi "imagename eq %IMG_NAME%" | find /i "%IMG_NAME%" > nul || (start %THE_EXE%)
+
+echo "cron job (StartIFNotRun) run at %date% %time%" >> C:\log\debug.log
+
+
+timeout 10
+
+echo 'set the task to the top'
+C:\Interactif\nircmdc.exe win settopmost title "some title" 1
+
+
+```
 
 [r1]: https://superuser.com/questions/1191650/why-is-windows-10-always-asking-for-administrator-permission-to-move-files
 [r2]: https://www.raymond.cc/blog/hidden-start-runs-batch-files-silently-without-flickering-console/
