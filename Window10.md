@@ -51,7 +51,7 @@ echo "cron job (StartIFNotRun) run at %date% %time%" >> C:\log\debug.log
 timeout 10
 
 echo 'set the task to the top'
-C:\Interactif\nircmdc.exe win settopmost title "some title" 1
+C:\path\to\nircmdc.exe win settopmost title "some title" 1
 
 
 ```
